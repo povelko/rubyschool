@@ -11,9 +11,7 @@ get '/about' do
 end
 
 get '/visit' do 
-	
 		@error 
-	
 	erb :visit
 end
 
@@ -54,13 +52,38 @@ end
 end
 
 post '/contacts' do
+	require 'pony'
 	@email = params[:email]
 	@text = params[:text]
+		hh = {:email=>"Не ввели адрес эл. почты",
+			  :text=>"Не заполнили сообщение"}
+		@error = hh.select { |key| params[key]==""}.values.join(", ")
+						
+						if @error != ""
+							return erb :contacts
+						end
+
 	value = "Эл. адрес: #{@email}| Сообщение:#{@text}"
-	add1= File.open "./public/" + @email + ".txt", "a"
-	add1.write value
-	add1.close
-	erb :contacts
+	add= File.open "./public/" + @email + ".txt", "a"
+	add.write value
+	add.close
+
+Pony.mail ({
+		:subject => "Привет из программы на руби!",
+		:body => @text,
+		:to => @email,
+		:from => 'znamcrb2020@bk.ru',
+		:via => :smtp,
+		:via_options => {
+			:address => 'smtp.mail.ru',
+			:port => '465',
+			:tls => true,
+			:user_name => 'znamcrb2020@bk.ru',
+			:password => 'KкriUTyTou332%',
+			:authentication => :plain}
+})
+
+	redirect '/'	
 end
 before '/secure/*' do
   unless session[:identity]
