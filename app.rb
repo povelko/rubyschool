@@ -68,7 +68,7 @@ post '/contacts' do
 	add.write value
 	add.close
 
-Pony.mail ({
+Pony.mail ({ 
 		:subject => "Привет из программы на руби!",
 		:body => @text,
 		:to => @email,
