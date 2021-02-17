@@ -1,0 +1,52 @@
+<h2>Запись на прием</h2>
+
+
+
+<form action="/visit" method="POST">
+  <div class="form-group">
+    <label>Введите данные пациента</label>
+    <input name="username" type="text" class="form-control" placeholder="Введите данные пациента" value="<%= @username %>">
+  </div>
+  
+  <div class="form-group">
+    <label>Введите дату</label>
+    <input name="date" type="datetime-local" class="form-control" placeholder="Введите дату" value="<%= @date %>">
+  </div>
+  <div class="form-group">
+    <label>Введите сотовый телефон</label>
+    <input name="phone" type="tel" pattern="8[0-9]{3}[0-9]{7}" class="form-control" placeholder="Образец:89507894562" value="<%= @phone %>">
+  </div> 
+  <div>
+   <label>Есть ли льгота?</label>
+    <select class ="form-control" name="lgota">
+      <option> </option>
+    	<option>Есть</option>
+    	<option>Нету</option>
+    </select> 
+  </div>
+  <div class="form-group">
+    <label>Выберите цвет: </label>
+
+    <select id='color' name = 'color'>
+      <option value="#7bd148">Green</option>
+      <option value="#5484ed">Bold blue</option>
+      <option value="#a4bdfc">Blue</option>
+      <option value="#46d6db">Turquoise</option>
+      <option value="#7ae7bf">Light green</option>
+      <option value="#51b749">Bold green</option>
+      <option value="#fbd75b">Yellow</option>
+      <option value="#ffb878">Orange</option>
+      <option value="#ff887c">Red</option>
+      <option value="#dc2127">Bold red</option>
+      <option value="#dbadff">Purple</option>
+      <option value="#e1e1e1">Gray</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Записать</button>
+</form>
+<script type="text/javascript">
+$(function () {
+    $('#color').simplecolorpicker();
+});
+
+</script>

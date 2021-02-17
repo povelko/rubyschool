@@ -1,0 +1,15 @@
+<h1>Добро пожаловать в административный раздел</h1>
+<br />
+<p><%= @error %></p>
+<form action="/admin" method="POST">
+	<div class="form-group">
+	<label>Введите логин:</label><br />
+	<input type="text" class="form-control" name="login"/><br />
+	<label>Введите пароль:</label><br />
+	<input type="password" class="form-control" name="pass"/><br />
+	<button type="submit" class="btn btn-primary">Вход</button><br />
+</form>
+
+<h2>Text file:</h2>
+
+
