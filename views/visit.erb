@@ -19,9 +19,9 @@
   <div>
    <label>Есть ли льгота?</label>
     <select class ="form-control" name="lgota">
-      <option> </option>
-    	<option>Есть</option>
-    	<option>Нету</option>
+  
+    	<option <%= @lgota == 'Есть' ? 'selected' : '' %> >Есть</option>
+    	<option <%= @lgota == 'Нету' ? 'selected' : '' %> >Нету</option>
     </select> 
   </div>
   <div class="form-group">
