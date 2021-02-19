@@ -72,14 +72,14 @@ Pony.mail ({
 		:subject => "Привет из программы на руби!",
 		:body => @text,
 		:to => @email,
-		:from => 'znamcrb2020@bk.ru',
+		:from => 'znamcrb@bk.ru',
 		:via => :smtp,
 		:via_options => {
 			:address => 'smtp.mail.ru',
 			:port => '465',
 			:tls => true,
-			:user_name => 'znamcrb2020@bk.ru',
-			:password => 'KкriUTyTou332%',
+			:user_name => 'znamcrb@bk.ru',
+			:password => 'KriUTyTou32%',
 			:authentication => :plain}
 })
 
