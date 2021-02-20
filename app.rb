@@ -2,6 +2,14 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+#configure do
+#	@db = SQLite3::Database.new 'zub.db'
+#end
+def sql
+	@db = SQLite3::Database.new 'zub.db'
+end
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
@@ -43,7 +51,9 @@ post '/visit' do
 if @error !=""
 	return erb :visit
 end
-
+	#сохранение в бд
+	sql
+	@db.execute 'INSERT INTO visit  (pacient, date_visit, phone, lgota) values (?, ?, ?, ?)', [@username, @date, @phone, @lgota] 
 	value = "ФИО: #{@username}| Телефон:#{@phone}| Дата и время:#{@date}#{@lgota} цвет: #{@color}"
 	add = File.open "./public/"+@username+".txt", "a"
 	add.write value
@@ -82,7 +92,6 @@ Pony.mail ({
 			:password => 'KriUTyTou32%',
 			:authentication => :plain}
 })
-
 	redirect '/'	
 end
 before '/secure/*' do
