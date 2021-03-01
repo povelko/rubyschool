@@ -111,6 +111,11 @@ Pony.mail ({
 			:password => 'KriUTyTou32%',
 			:authentication => :plain}
 })
+
+sql
+	@db.execute 'INSERT INTO contacts  (date_visit, phone, lgota) values (?, ?, ?, ?)', [@username, @date, @phone, @lgota] 
+	value = "ФИО: #{@username}| Телефон:#{@phone}| Дата и время:#{@date}#{@lgota} цвет: #{@color}"
+
 	redirect '/'	
 end
 before '/secure/*' do
