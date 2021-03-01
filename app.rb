@@ -9,6 +9,7 @@ require 'sqlite3'
 #end
 def sql
 	@db = SQLite3::Database.new 'zub.db'
+	#@db.results_as_hash = true
 end
 
 get '/' do
@@ -22,6 +23,24 @@ get '/visit' do
 		@error 
 	erb :visit
 end
+
+get '/zapis' do 
+		sql
+		@sql_v = []
+		@resultat=''
+		last=''
+		@db.execute 'select * from visit order by pacient' do |row|
+		@sql_v <<row
+				end
+
+		0.upto(@sql_v.count-1) do |x|
+
+@resultat =  "<tr><td><%= @sql_v[#{x}][1]%></td> <td><%= @sql_v[#{x}][2]%></td><td><%= @sql_v[#{x}][3]%></td><td><%= @sql_v[#{x}][4]%></td></tr>" + last
+last = @resultat
+	end
+	erb :zapis
+end
+#pacient||" "||phone||" "||date_visit||" "||lgota as vd
 
 get '/contacts' do
 	erb :contacts
