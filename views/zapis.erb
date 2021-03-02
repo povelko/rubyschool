@@ -1,39 +1,18 @@
 
-<table border="1" solid>
+<table class="table">
 <tr>
 	<th>ФИО</th>
 	<th>Телефон</th>
 	<th>Есть льгота?</th>
 	<th>Дата визита</th>
 </tr> <!--ряд с ячейками заголовков-->
-
+<% @resultat.each do |x| %>
 <tr>
-	<td><%= @sql_v[2][1]%></td> 
-	<td><%= @sql_v[2][2]%></td>
-	<td><%= @sql_v[2][3]%></td>
-	<td><%= @sql_v[2][4]%></td>
-</tr> 
-<tr>	
-	<td><%= @sql_v[1][1]%></td>
-	 <td><%= @sql_v[1][2]%></td>
-	 <td><%= @sql_v[1][3]%></td>
-	 <td><%= @sql_v[1][4]%></td>
-</tr> 	
-<tr>
-	 <td><%= @sql_v[0][1]%></td>
-	  <td><%= @sql_v[0][2]%></td>
-	  <td><%= @sql_v[0][3]%></td>
-	  <td><%= @sql_v[0][4]%></td>
-	<%= @resultat%>
-
-</tr> 
-<tr>
-	<td><%= @sql_v[3][1]%></td> 
-	<td><%= @sql_v[3][2]%></td>
-	<td><%= @sql_v[3][3]%></td>
-	<td><%= @sql_v[3][4]%></td>
+	<td><%= "#{x['pacient']}" %></td> 
+	<td><%= "#{x['phone']}" %></td>
+	<td><%= "#{x['lgota']}" %></td>
+	<td><%= "#{x['date_visit']}" %></td>
 </tr>
-<tr>
-	
-</tr>><!--ряд с ячейками тела таблицы-->
+<% end %>
+
 </table>

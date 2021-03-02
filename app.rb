@@ -8,8 +8,9 @@ require 'sqlite3'
 #	@db = SQLite3::Database.new 'zub.db'
 #end
 def sql
+	
 	@db = SQLite3::Database.new 'zub.db'
-	#@db.results_as_hash = true
+	@db.results_as_hash = true
 end
 
 get '/' do
@@ -17,6 +18,9 @@ get '/' do
 end
 get '/about' do
 	erb :about
+end
+get '/baza_pac' do 
+	erb :baza_pac
 end
 
 get '/visit' do 
@@ -26,19 +30,9 @@ end
 
 get '/zapis' do 
 		sql
-		@sql_v = []
-		@resultat=''
-		last=''
-		@db.execute 'select * from visit order by pacient' do |row|
-		@sql_v <<row
-				end
-
-		0.upto(@sql_v.count-1) do |x|
-
-@resultat =  "<tr><td><%= @sql_v[#{x}][1]%></td> <td><%= @sql_v[#{x}][2]%></td><td><%= @sql_v[#{x}][3]%></td><td><%= @sql_v[#{x}][4]%></td></tr>" + last
-last = @resultat
-	end
-	erb :zapis
+		
+		@resultat = @db.execute 'select * from visit order by date_visit' 
+		erb :zapis
 end
 #pacient||" "||phone||" "||date_visit||" "||lgota as vd
 
@@ -113,9 +107,7 @@ Pony.mail ({
 })
 
 sql
-	@db.execute 'INSERT INTO contacts  (date_visit, phone, lgota) values (?, ?, ?, ?)', [@username, @date, @phone, @lgota] 
-	value = "ФИО: #{@username}| Телефон:#{@phone}| Дата и время:#{@date}#{@lgota} цвет: #{@color}"
-
+	@db.execute 'INSERT INTO contacts  (email, text) values (?, ?)', [@email, @text] 
 	redirect '/'	
 end
 before '/secure/*' do
