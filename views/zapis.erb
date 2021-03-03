@@ -8,10 +8,10 @@
 </tr> <!--ряд с ячейками заголовков-->
 <% @resultat.each do |x| %>
 <tr>
-	<td><%= "#{x['pacient']}" %></td> 
-	<td><%= "#{x['phone']}" %></td>
-	<td><%= "#{x['lgota']}" %></td>
-	<td><%= "#{x['date_visit']}" %></td>
+	<td><%= x['pacient'] %></td> 
+	<td><%= x['phone'] %></td>
+	<td><%= x['lgota'] %></td>
+	<td><%= x['date_visit'] %></td>
 </tr>
 <% end %>
 
